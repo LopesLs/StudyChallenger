@@ -1,45 +1,46 @@
 {% extends 'index.html' %}
+
 {% load static %}
 
 {% block style %} 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/authenticate.css' %}">
 {% endblock %}
 
-{% block title %} StudyChallenger | Signup {% endblock %}
+{% block title %} <title>StudyChallenger | Signup</title> {% endblock %}
 
 {% block content %}
-    <div class="bg1">
+    <div class="background">
         <div class="container">
             <div class="row">
                 <div class="col-md">
-                    <div class="box-titulo">
-                        <div class="box-titulo-item">
+                    <div class="logo-container">
+                        <div>
                             <img src="{% static 'images/logo.png' %}" alt="">
                         </div>
-                        <div style="margin-top: auto; margin-bottom: auto;" class="box-titulo-item">
+                        <div class="title-container">
                             <h3>StudyChallenger</h3>
                         </div>
                     </div>
-                    <hr class="divisor">
-                    <br>
-                    <div class="tac">
-                        <h4 style="font-size: 30px">Sua plataforma online<br> para te ajudar nos estudos</h4>
+
+                    <hr class="horizontal-line">
+                    
+                    <div class="description-container">
+                        <h4>Sua plataforma online <br> para te ajudar nos estudos</h4>
                     </div>
                 </div>
+                
                 <div class="col-md">
-                    <br><br>
-                    <div class="box-form">
-                        <div class="box-circle">
-                            <div class="circle c1"></div>
-                            <div class="circle c2"></div>
-                            <div class="circle c3"></div>
-                        </div>
-                        <br>                   
+                    <div class="form-container">
+                        <div class="circle-container">
+                            <div class="circle-1"></div>
+                            <div class="circle-2"></div>
+                            <div class="circle-3"></div>
+                        </div>                   
                         
-                        {% block action %} <h3>Cadastre-se</h3> {% endblock %}
+                        {% block action %} <h3 class="action">Cadastre-se</h3> {% endblock %}
                         
                         {% block form %}
-                            <p>Já tem conta? <a href="/accounts/login">Logue-se</a></p>
+                            <p>Já tem conta? <a href="{% url 'account_login' %}">Logue-se</a></p>
 
                             <form method="post">
                                 {% csrf_token %}

@@ -3,65 +3,76 @@
     padding: 0;
 }
 
-.bg1{
-
-    background-image: url('../images/bg1.png') !important;
+.background {
+    background-image: url('../images/background.png') !important;
     height: 100vh;
     background-size: cover;
-
 }
 
-.titulo-fonte{
-    margin-top: 20px;
-}
-
-.box-titulo{
+.logo-container {
     display: flex;
 }
 
-.divisor{
+.title-container {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.title-container > h3 {
+    margin-top: 1rem;
+}
+
+.horizontal-line{
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, transparent, rgb(162, 219, 236), transparent);
     display: block;
-
 }
 
-.tac{
+.description-container {
     text-align: center;
+    margin-top: 2rem;
 }
 
-.box-form{
+.description-container > h4 {
+    font-size: 30px;
+}
+
+.form-container {
+    margin-top: 2rem;
     padding: 20px;
     background-color: rgba(217,217,217, .05);
     color: white !important;
 }
 
-.box-circle{
+.circle-container {
     display: flex;
     gap: 5px;
-    
 }
 
-.circle{
+.circle-container > div {
     width: 16px;
     height: 16px;
     border-radius: 8px;
 }
 
-.c1{
+.circle-1 {
     background-color: #3E79EB;
 }
 
-.c2{
+.circle-2 {
     background-color: #29BFC9;
 }
 
-.c3{
+.circle-3 {
     background-color: #D98562
 }
 
-.input-form{
+.action {
+    margin-top: 2rem;
+}
+
+.input-form {
     background-color: #0b1526;
     padding: 10px;
     border: none;
@@ -72,7 +83,7 @@
 
 }
 
-.btn-cadastro{
+.btn-cadastro {
     padding: 10px;
     background-color: #58fcd5;
     border: none;
