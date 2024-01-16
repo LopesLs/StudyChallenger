@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/logout.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="logout-container">
+        <h1>Logout</h1>
+        <p>Tem certeza que deseja sair?</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-danger" type="submit">Sair</button>
+        </form>
+    </div>
+{% endblock %}
