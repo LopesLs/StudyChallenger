@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/authenticate.css' %}">
+{% endblock %}
+
+{% block title %} <title>StudyChallenger | Signup</title> {% endblock %}
+
+{% block content %}
+    <div class="background">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <div class="logo-container">
+                        <div>
+                            <img src="{% static 'images/logo.png' %}" alt="">
+                        </div>
+                        <div class="title-container">
+                            <h3>StudyChallenger</h3>
+                        </div>
+                    </div>
+
+                    <hr class="horizontal-line">
+                    
+                    <div class="description-container">
+                        <h4>Sua plataforma online <br> para te ajudar nos estudos</h4>
+                    </div>
+                </div>
+                
+                <div class="col-md">
+                    <div class="form-container">
+                        <div class="circle-container">
+                            <div class="circle-1"></div>
+                            <div class="circle-2"></div>
+                            <div class="circle-3"></div>
+                        </div>                   
+                        
+                        {% block action %} <h3 class="action">Cadastre-se</h3> {% endblock %}
+                        
+                        {% block form %}
+                            <p>Já tem conta? <a href="{% url 'account_login' %}">Logue-se</a></p>
+
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input class="btn btn-cadastro" type="submit" value="Cadastrar">
+                            </form>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

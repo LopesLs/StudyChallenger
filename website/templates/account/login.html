@@ -1,0 +1,13 @@
+{% extends 'account/signup.html' %}
+
+{% block action %} <h3 class="action">Logar</h3> {% endblock %}
+
+{% block form %}
+    <p>Não tem conta ainda? <a href="{% url 'account_signup' %}">Cadastre-se</a></p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-cadastro" type="submit" value="Logar">
+    </form>
+{% endblock %}
