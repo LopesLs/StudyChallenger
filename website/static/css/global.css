@@ -1,0 +1,24 @@
+:root{
+     
+    --main-color: #0b1526;
+    --dark-color: #000716;
+    --secondary-dark-color: rgb(15, 2, 26);
+    --light-color: #00c1f3;
+    --contrast-color: #f4c96b;
+    --differential-color: #58fcd5;
+
+}
+
+body{
+    background-color: var(--dark-color) !important;
+    color: white !important;
+}
+
+.icon {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.alert {
+    --bs-alert-margin-bottom: 0px !important;
+}
