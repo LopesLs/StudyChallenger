@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel='stylesheet'>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+                <form action="" method="GET">
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="">Categoria</label>
+                            <select name="categoria" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md">
+                            <label for="">Dificuldade</label>
+                            <select name="dificuldade" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md">
+                            <br>
+                            <input type="submit" style="width: 100%" value="Filtrar" class="btn-cadastro">
+                        </div>
+                    </div>
+
+                </form>
+                <br><br>
+
+                {{ objects_list }}
+
+                <div class="box-new-flashcard">
+                    <div class="flashcard">
+                        <div class="flashcard-categoria">
+                            Matematica
+                        </div>
+
+                        <a href=""><i class='icone-exit bx bx-x-circle'></i></a>
+                        
+                        <br><br>
+                        
+                        <div class="flashcard-box-item">
+                            <p class="flashcard-item">1 + 1 = 2</p>
+                        </div>
+
+                    </div>
+                
+                    <div class="resposta-flashcard">
+                        Sim
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
