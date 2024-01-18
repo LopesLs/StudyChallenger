@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/start-challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/challenge.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+                <h3 class="fonte-secundaria">Desafio iniciado</h3>
+                {% for category in challenge.categoria.all %} 
+                    <span class="badge-categoria">{{ category }}</span>
+                {% endfor %}
+                <br><br><br>
+                {% for flashcard in challenge.flashcards.all %}
+                <div class="box-new-flashcard {% if flashcard.respondido %}op2{% endif %}">
+                    <div class="flashcard {{ flashcard.flashcard.css_difficulty }}">
+                        <div class="flashcard-categoria">
+                            {{ flashcard.flashcard.categoria }}
+                        </div>
+                        
+                        <br><br>
+                        
+                        <div class="flashcard-box-item">
+                            <p class="flashcard-item" onclick="show_awnser({{flashcard.id}})">{{flashcard.flashcard.pergunta}}</p>
+                        </div>
+
+                        {% if not flashcard.respondido %}
+                            <div class="responder">
+                                <a href="{% url 'awnser-flashcard' flashcard.id %}?acertou=0&desafio_id={{ challenge.id }}"><i class='bx bxs-x-square icone-vermelho'></i></a>
+                                <a href="{% url 'awnser-flashcard' flashcard.id %}?acertou=1&desafio_id={{ challenge.id }}"><i class='bx bxs-check-square icone-verde'></i></a>
+                            </div>
+                        {% else %}
+                            {% if flashcard.acertou %}
+                                <span class="badge bg-success">Acertou</span>
+                            {% else %}
+                                <span class="badge bg-danger">Errou</span>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                    
+                    <div class="resposta-flashcard" id="{{flashcard.id}}">
+                        {{flashcard.flashcard.resposta}}
+                    </div>
+                </div>
+                <br>
+                <br>
+                {% endfor %}
+
+            </div>
+            <div class="col-md">
+
+                <h3 class="fonte-secundaria">Resultado</h3>
+                <p class="fonte-p">Acertos: {{ acertos }}</p>
+                <p class="fonte-p">Erros: {{ erros }}</p>
+                <p class="fonte-p">Faltantes: {{ faltantes }}</p>
+                <br>
+                <a class="btn-cadastro btn-desafio" href="">Relatório detalhado</a>
+            </div>
+        </div>
+
+    </div>
+    <script src="{% static 'flashcard/js/main.js' %}"></script>
+{% endblock %}

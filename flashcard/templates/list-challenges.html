@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/start-challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/challenge.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md">
+                <form action="" method="GET">
+                    <label for="">Categoria</label>
+                    <select name="categoria" class="form-select">
+
+                    </select>
+            </div>
+            <div class="col-md">
+                <label for="">Dificuldade</label>
+                <select name="dificuldade" class="form-select">
+
+                </select>
+            </div>
+            <div class="col-md">
+                <br>
+                <input type="submit" value="Filtrar" class="btn-cadastro">
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="box-listar">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Desafio</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Dificuldade</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for challenge in challenges %}
+                    <tr class="linha">
+                        <th><a href="{% url 'detail-challenge' challenge.id %}">{{challenge.id}}</a></th>
+                        <td>{{challenge.titulo}}</td>
+                        <td>{{challenge.get_dificuldade_display}}</td>
+                        <td>{{challenge.status}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static 'flashcard/js/utils.js' %}"></script>
+{% endblock %}

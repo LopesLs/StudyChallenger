@@ -45,7 +45,7 @@
                 <br><br>
 
                 {% for flashcard in flashcards %}
-                    <div class="box-new-flashcard" onclick="show_awnser({{ flashcard.id }})">
+                    <div class="box-new-flashcard">
                         <div class="flashcard">
                             <div class="flashcard-categoria">
                                 {{ flashcard.categoria }}
@@ -55,7 +55,7 @@
                             
                             <br><br>
                             
-                            <div class="flashcard-box-item">
+                            <div class="flashcard-box-item" onclick="show_awnser({{ flashcard.id }})">
                                 <p class="flashcard-item">{{ flashcard.pergunta }}</p>
                             </div>
 
@@ -66,10 +66,18 @@
                         </div>
                     </div>
                     <br><br>
+                {% empty %}
+                    <div class="box-new-flashcard">
+                        <div class="flashcard">
+                            <div class="flashcard-categoria">
+                                Nenhum flashcard encontrado
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 
-    <script src={% static 'flashcard/js/main.js' %}></script>
+    <script src={% static 'flashcard/js/utils.js' %}></script>
 {% endblock %}

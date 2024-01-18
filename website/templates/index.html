@@ -11,6 +11,30 @@
     {% block title %} <title> StudyChallenger | Home Page </title> {% endblock %}
 </head>
 <body>
+    <nav style="background-color: var(--main-color)" class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Study.Async</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Flashcard
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'new-flashcard' %}">Criar flashcard</a></li>
+                <li><a class="dropdown-item" href="{% url 'new-challenge' %}">Criar desafio</a></li>
+                <li><a class="dropdown-item" href="{% url 'list-challenges' %}">Listar desafio</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Apostilas</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert {{ message.tags }} alert-dismissible fade-show" role="alert">
