@@ -16,16 +16,22 @@
                 <form action="" method="GET">
                     <div class="row">
                         <div class="col-md">
-                            <label for="">Categoria</label>
-                            <select name="categoria" id="" class="form-select">
-                                <option value=""></option>
-                            </select>
+                            <label for="category">Categoria</label>
+                                <select name="category" id="" class="form-select">
+                                    <option value="" selected></option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category }}</option>
+                                    {% endfor %}
+                                </select>
                         </div>
 
                         <div class="col-md">
-                            <label for="">Dificuldade</label>
-                            <select name="dificuldade" id="" class="form-select">
-                                <option value=""></option>
+                            <label for="dificulty">Dificuldade</label>
+                            <select name="dificulty" id="" class="form-select">
+                                <option value="" selected></option>
+                                {% for dificulty in dificulties %}
+                                        <option value="{{ dificulty.0 }}">{{ dificulty.1 }}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -38,30 +44,32 @@
                 </form>
                 <br><br>
 
-                {{ objects_list }}
+                {% for flashcard in flashcards %}
+                    <div class="box-new-flashcard" onclick="show_awnser({{ flashcard.id }})">
+                        <div class="flashcard">
+                            <div class="flashcard-categoria">
+                                {{ flashcard.categoria }}
+                            </div>
 
-                <div class="box-new-flashcard">
-                    <div class="flashcard">
-                        <div class="flashcard-categoria">
-                            Matematica
+                            <a href="{% url 'del-flashcard' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
+                            
+                            <br><br>
+                            
+                            <div class="flashcard-box-item">
+                                <p class="flashcard-item">{{ flashcard.pergunta }}</p>
+                            </div>
+
                         </div>
-
-                        <a href=""><i class='icone-exit bx bx-x-circle'></i></a>
-                        
-                        <br><br>
-                        
-                        <div class="flashcard-box-item">
-                            <p class="flashcard-item">1 + 1 = 2</p>
+                    
+                        <div class="resposta-flashcard" id="{{ flashcard.id }}">
+                            {{ flashcard.resposta }}
                         </div>
-
                     </div>
-                
-                    <div class="resposta-flashcard">
-                        Sim
-                    </div>
-                </div>
-                <br><br>
+                    <br><br>
+                {% endfor %}
             </div>
         </div>
     </div>
+
+    <script src={% static 'flashcard/js/main.js' %}></script>
 {% endblock %}
