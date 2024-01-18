@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel='stylesheet'>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+                <form action="" method="GET">
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="category">Categoria</label>
+                                <select name="category" id="" class="form-select">
+                                    <option value="" selected></option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+
+                        <div class="col-md">
+                            <label for="dificulty">Dificuldade</label>
+                            <select name="dificulty" id="" class="form-select">
+                                <option value="" selected></option>
+                                {% for dificulty in dificulties %}
+                                        <option value="{{ dificulty.0 }}">{{ dificulty.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md">
+                            <br>
+                            <input type="submit" style="width: 100%" value="Filtrar" class="btn-cadastro">
+                        </div>
+                    </div>
+
+                </form>
+                <br><br>
+
+                {% for flashcard in flashcards %}
+                    <div class="box-new-flashcard" onclick="show_awnser({{ flashcard.id }})">
+                        <div class="flashcard">
+                            <div class="flashcard-categoria">
+                                {{ flashcard.categoria }}
+                            </div>
+
+                            <a href="{% url 'del-flashcard' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
+                            
+                            <br><br>
+                            
+                            <div class="flashcard-box-item">
+                                <p class="flashcard-item">{{ flashcard.pergunta }}</p>
+                            </div>
+
+                        </div>
+                    
+                        <div class="resposta-flashcard" id="{{ flashcard.id }}">
+                            {{ flashcard.resposta }}
+                        </div>
+                    </div>
+                    <br><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src={% static 'flashcard/js/main.js' %}></script>
+{% endblock %}

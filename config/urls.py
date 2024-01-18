@@ -18,7 +18,8 @@ from django.urls import path, include
 from django.contrib import admin
 
 urlpatterns = [
-    path('', include('website.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls),
+    path("", include("website.urls")),
+    path("flashcards/", include("flashcard.urls")),
+    path("accounts/", include("allauth.urls")),
+    path("admin/", admin.site.urls),
 ]

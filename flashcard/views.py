@@ -1,3 +1,48 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import DeleteView
+from django.views.generic.list import ListView
+from django.views.generic import CreateView
 
-# Create your views here.
+from .models import Flashcard, Categoria
+from .forms import FlashcardForm
+
+
+class FlashcardRequestHandler(LoginRequiredMixin, ListView):
+    model = Flashcard
+    template_name = "flashcard_list.html"
+    context_object_name = "flashcards"
+
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Categoria.objects.all()
+        context["dificulties"] = Flashcard.DIFICULDADE_CHOICES
+        return context
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category = self.request.GET.get("category")
+        difficulty = self.request.GET.get("dificulty")
+        
+        if category:
+            queryset = queryset.filter(categoria__id=category)
+        
+        if difficulty:
+            queryset = queryset.filter(dificuldade=difficulty)
+        
+        return queryset
+
+
+class NewFlashcardRequestHandler(LoginRequiredMixin, CreateView):
+    model = Flashcard
+    form_class = FlashcardForm
+    template_name = "new-flashcard.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class DelFlashcardRequestHandler(LoginRequiredMixin, DeleteView):
+    model = Flashcard
+    template_name = "del-flashcard.html"
+    success_url = "/flashcards/"

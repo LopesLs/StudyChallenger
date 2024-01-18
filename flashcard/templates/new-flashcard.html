@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block style %} 
+    <link rel="stylesheet" href="{% static 'flashcard/css/new-flashcard.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/authenticate.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">Novo Flashcard</h1>
+    <div class="box-new-flashcard">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Enviar" class="btn-cadastro">
+        </form>
+    </div>
+{% endblock %}
