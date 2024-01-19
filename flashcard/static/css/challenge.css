@@ -1,0 +1,65 @@
+.badge-categoria{
+    padding: 5px;
+    background-color: #122342;
+    
+}
+
+.box-new-flashcard{
+    margin: 0;
+}
+
+.icone-vermelho{
+    color:red;
+    font-size: 30px;
+}
+
+.icone-verde{
+    color:green;
+    font-size: 30px;
+}
+
+.op2{
+    opacity: .3;
+}
+
+.fonte-p{
+    font-size: 25px;
+}
+
+.btn-desafio{
+    width: 100% !important;
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 25px;
+}
+
+.box-listar{
+    
+    background-color: #0b1526;
+    padding: 20px;
+}
+
+table{
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.linha{
+    height: 40px;
+    background-color: var(--dark-color);
+    padding: 20px;
+}
+
+
+td, th{
+    padding: 20px;
+}
+
+tr{
+    background-color: var(--main-color);
+
+}

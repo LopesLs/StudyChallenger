@@ -1,0 +1,12 @@
+.fonte-principal{
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.fonte-secundaria{
+    font-size: 35px;
+}
+
+.ctx{
+    text-align: center;
+}
