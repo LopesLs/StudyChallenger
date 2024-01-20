@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="title">Novo Flashcard</h1>
     <div class="box-new-flashcard">
+        <h1 class="title mt-3 mb-3">Novo Flashcard</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
