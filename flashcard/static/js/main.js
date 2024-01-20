@@ -1,9 +1,14 @@
-function show_awnser(id) {
-    card = document.getElementById(id);
+function toggleAwnserDisplay(id) {
+    let awnser = document.getElementById(id);
+    let cardContainer = document.getElementById('flashcard-container');
+
+    if (cardContainer.classList.contains('op2')) {
+        return;
+    }
     
-    if (card.style.display === 'none' || card.style.display === '') {
-        card.style.display = 'block';
+    if (awnser.style.display === 'none' || awnser.style.display === '') {
+        awnser.style.display = 'block';
     } else {
-        card.style.display = "none";
+        awnser.style.display = "none";
     }
 }
