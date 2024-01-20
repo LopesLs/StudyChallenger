@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "website.apps.WebsiteConfig",
     "flashcard.apps.FlashcardConfig",
+    "apostilas.apps.ApostilasConfig",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -136,6 +137,11 @@ STATICFILES_DIRS = [
     ('website', BASE_DIR / "website/static"),
     ('flashcard', BASE_DIR / "flashcard/static"),
 ]
+
+MEDIA_ROOT = BASE_DIR / "media"
+
+MEDIA_URL = "/media/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

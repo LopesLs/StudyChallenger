@@ -13,4 +13,5 @@ urlpatterns = [
     path('list-challenges/', views.ListChallengeRequestHandler.as_view(), name='list-challenges'),
     path('detail-challenge/<int:pk>', views.DetailChallengeRequestHandler.as_view(), name='detail-challenge'),
 
+    path('relatory-challenge/<int:pk>', views.RelatoryChallengeRequestHandler, name='relatory-challenge'),
 ]

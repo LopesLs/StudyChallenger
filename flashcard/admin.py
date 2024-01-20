@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Flashcard, Categoria
+from .models import Flashcard, Categoria, Desafio, FlashcardDesafio
 
-# Register your models here.
-admin.site.register(Flashcard)
-admin.site.register(Categoria)
+for model in [Flashcard, Categoria, Desafio, FlashcardDesafio]:
+    admin.site.register(model)

@@ -2,8 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from .models import Flashcard, Categoria, Desafio, FlashcardDesafio
@@ -127,9 +127,7 @@ class DetailChallengeRequestHandler(LoginRequiredMixin, DetailView):
             respondido=True, acertou=False
         ).count()
 
-        context["faltantes"] = challenge.flashcards.filter(
-            respondido=False
-        ).count()
+        context["faltantes"] = challenge.flashcards.filter(respondido=False).count()
 
         return context
 
@@ -150,4 +148,31 @@ def AwnserFlashcardRequestHandler(request, pk):
 
     return redirect(
         reverse_lazy("detail-challenge", kwargs={"pk": request.GET.get("desafio_id")})
+    )
+
+
+def RelatoryChallengeRequestHandler(request, pk):
+    challenge = Desafio.objects.get(id=pk)
+    acertos = challenge.flashcards.filter(respondido=True, acertou=True).count()
+    erros = challenge.flashcards.filter(respondido=True, acertou=False).count()
+
+    if challenge.user != request.user:
+        return redirect(reverse_lazy("list-flashcards"))
+
+    categories = challenge.categoria.all()
+    name_categories = [category.nome for category in categories]
+
+    dados2 = []
+
+    for category in categories:
+        dados2.append(
+            challenge.flashcards.filter(flashcard__categoria=category)
+            .filter(acertou=True)
+            .count()
+        )
+
+    return render(
+        request,
+        "relatory.html",
+        {"challenge": challenge, "acertos": acertos, "erros": erros, "dados2": dados2, "categories": name_categories},
     )
