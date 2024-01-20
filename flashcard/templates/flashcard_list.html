@@ -45,17 +45,19 @@
                 <br><br>
 
                 {% for flashcard in flashcards %}
-                    <div class="box-new-flashcard">
-                        <div class="flashcard">
-                            <div class="flashcard-categoria">
+                    <div id="flashcard-container" class="box-new-flashcard">
+                        <div class="flashcard d-flex flex-column">
+                            <div class="flashcard-categoria d-flex justify-content-between align-center">
                                 {{ flashcard.categoria }}
+                                <div class="d-flex flex-row gap-2 align-items-center">
+                                    <span class="badge rounded-pill text-bg-{{flashcard.css_difficulty.0}}">{{ flashcard.css_difficulty.1 }}</span>
+                                    <a href="{% url 'del-flashcard' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
+                                </div>
                             </div>
 
-                            <a href="{% url 'del-flashcard' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
-                            
                             <br><br>
                             
-                            <div class="flashcard-box-item" onclick="show_awnser({{ flashcard.id }})">
+                            <div class="mt-3 d-flex flex-column" onclick="toggleAwnserDisplay({{ flashcard.id }})">
                                 <p class="flashcard-item">{{ flashcard.pergunta }}</p>
                             </div>
 
@@ -79,5 +81,5 @@
         </div>
     </div>
 
-    <script src={% static 'flashcard/js/utils.js' %}></script>
+    <script src={% static 'flashcard/js/main.js' %}></script>
 {% endblock %}

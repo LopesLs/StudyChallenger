@@ -19,14 +19,20 @@
             <div class="col-md">
                 <form action="" method="GET">
                     <label for="">Categoria</label>
-                    <select name="categoria" class="form-select">
-
+                    <select name="category" class="form-select">
+                        <option value="" selected></option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category }}</option>
+                        {% endfor %}
                     </select>
             </div>
             <div class="col-md">
                 <label for="">Dificuldade</label>
-                <select name="dificuldade" class="form-select">
-
+                <select name="difficulty" class="form-select">
+                    <option value="" selected></option>
+                        {% for dificulty in dificulties %}
+                            <option value="{{ dificulty.0 }}">{{ dificulty.1 }}</option>
+                        {% endfor %}
                 </select>
             </div>
             <div class="col-md">
@@ -41,20 +47,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Desafio</th>
+                        <th scope="col">Desafio ID</th>
                         <th scope="col">Titulo</th>
                         <th scope="col">Dificuldade</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for challenge in challenges %}
-                    <tr class="linha">
-                        <th><a href="{% url 'detail-challenge' challenge.id %}">{{challenge.id}}</a></th>
-                        <td>{{challenge.titulo}}</td>
-                        <td>{{challenge.get_dificuldade_display}}</td>
-                        <td>{{challenge.status}}</td>
-                    </tr>
+                        <tr class="linha">
+                            <th><a href="{% url 'detail-challenge' challenge.id %}">{{challenge.id}}</a></th>
+                            <td>{{challenge.titulo}}</td>
+                            <td>{{challenge.get_dificuldade_display}}</td>
+                            {% if challenge.status %}
+                                <td>Concluído</td>
+                            {% else %}
+                                <td>Pendente</td>
+                            {% endif %}
+                            <td><a class="btn btn-danger" href="{% url 'del-challenge' challenge.id %}">Excluir</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">Nenhum desafio encontrado</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
