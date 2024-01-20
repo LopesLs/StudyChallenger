@@ -10,6 +10,7 @@ urlpatterns = [
     path('awnser-flashcard/<int:pk>', views.AwnserFlashcardRequestHandler, name='awnser-flashcard'),
     
     path('new-challenge/', views.NewChallengeRequestHandler.as_view(), name='new-challenge'),
+    path('del-challenge/<int:pk>', views.DelChallengeRequestHandler.as_view(), name='del-challenge'),
     path('list-challenges/', views.ListChallengeRequestHandler.as_view(), name='list-challenges'),
     path('detail-challenge/<int:pk>', views.DetailChallengeRequestHandler.as_view(), name='detail-challenge'),
 

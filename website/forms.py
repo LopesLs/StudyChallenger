@@ -22,5 +22,5 @@ class CustomLoginForm(LoginForm):
         super().__init__(*args, **kwargs)
         self.fields["login"].widget = forms.TextInput(attrs={"class": "input-form"})
         self.fields["password"].widget = forms.PasswordInput(
-            attrs={"class": "input-form"}
+            attrs={"class": "input-form mb-3"}
         )
