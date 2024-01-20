@@ -14,6 +14,11 @@ body{
     color: white !important;
 }
 
+.navbar {
+    background-color: red !important;
+    color: white !important;
+}
+
 .icon {
     width: 18px !important;
     height: 18px !important;
