@@ -11,7 +11,7 @@ class FlashcardForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["pergunta"].widget.attrs.update({"class": "form-control"})
-        self.fields["resposta"].widget.attrs.update({"class": "form-control"})
+        self.fields["resposta"].widget.attrs.update({"class": "form-control limited-textarea"})
         self.fields["categoria"].widget.attrs.update({"class": "form-control"})
         self.fields["dificuldade"].widget.attrs.update({"class": "form-control"})
 

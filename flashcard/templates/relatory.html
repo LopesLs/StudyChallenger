@@ -12,8 +12,7 @@
 
 {% block content %}
     <div class="container">
-        <br>
-        <br>
+        <br><br>
         <div class="row">
             <div class="col-md">
                 <p class="fonte-secundaria">{{ challenge.titulo }}</p>
@@ -22,16 +21,13 @@
             </div>
             <div class="col-md">
                 <br><br><br><br>
-
                 <div style="background-color: white;">
-
                     <canvas id="grafico2"></canvas>
-
                 </div>
             </div>
         </div>
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -57,18 +53,10 @@
         new Chart(ctx2, {
           type: 'radar',
           data: {
-            labels: [{{ categories|safe }}],
+            labels: {{ categories|safe }},
             datasets: [{
               label: 'Quantidade',
-              data: [{{ data2 }}],
-              borderWidth: 1,
-              fill: true,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgb(255, 99, 132)',
-              pointBackgroundColor: 'rgb(255, 99, 132)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgb(255, 99, 132)'
+              data: {{ dados2 }},
             }]
           },
           

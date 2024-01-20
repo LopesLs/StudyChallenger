@@ -4,6 +4,10 @@
     
 }
 
+.title {
+    margin: 1rem 0 1rem 0 !important;
+}
+
 .box-new-flashcard{
     margin: 0;
 }

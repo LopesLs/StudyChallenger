@@ -9,10 +9,6 @@
     padding: 20px;
 }
 
-.flashcard-box-item{
-    text-align: center;
-}
-
 .flashcard p{
     font-size: 20px;
     font-weight: bold;
@@ -54,4 +50,10 @@
     float: right;
     font-size: 25px;
     color: orangered;
+}
+
+.limited-textarea {
+    resize: none !important;
+    min-height: 3.25rem;
+    max-height: 8.75rem;
 }

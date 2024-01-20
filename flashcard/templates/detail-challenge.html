@@ -22,16 +22,26 @@
                 {% endfor %}
                 <br><br><br>
                 {% for flashcard in challenge.flashcards.all %}
-                <div class="box-new-flashcard {% if flashcard.respondido %}op2{% endif %}">
+                <div id="flashcard-container" class="box-new-flashcard {% if flashcard.respondido %}op2{% endif %}">
                     <div class="flashcard {{ flashcard.flashcard.css_difficulty }}">
-                        <div class="flashcard-categoria">
+                        <div class="flashcard-categoria d-flex justify-content-between align-center">
                             {{ flashcard.flashcard.categoria }}
+                            <div class="d-flex flex-row gap-2 align-items-center">
+                                <span class="badge rounded-pill text-bg-{{flashcard.flashcard.css_difficulty.0}}">{{ flashcard.flashcard.css_difficulty.1 }}</span>
+                                {% if flashcard.respondido %}
+                                    {% if flashcard.acertou %}
+                                        <span class="badge rounded-pill text-bg-success">Acertou</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill text-bg-danger">Errou</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
                         
-                        <br><br>
+                        <br>
                         
-                        <div class="flashcard-box-item">
-                            <p class="flashcard-item" onclick="show_awnser({{flashcard.id}})">{{flashcard.flashcard.pergunta}}</p>
+                        <div class="flashcard-box-item d-flex flex-column">
+                            <p class="flashcard-item" onclick="toggleAwnserDisplay({{flashcard.id}})">{{flashcard.flashcard.pergunta}}</p>
                         </div>
 
                         {% if not flashcard.respondido %}
@@ -39,12 +49,6 @@
                                 <a href="{% url 'awnser-flashcard' flashcard.id %}?acertou=0&desafio_id={{ challenge.id }}"><i class='bx bxs-x-square icone-vermelho'></i></a>
                                 <a href="{% url 'awnser-flashcard' flashcard.id %}?acertou=1&desafio_id={{ challenge.id }}"><i class='bx bxs-check-square icone-verde'></i></a>
                             </div>
-                        {% else %}
-                            {% if flashcard.acertou %}
-                                <span class="badge bg-success">Acertou</span>
-                            {% else %}
-                                <span class="badge bg-danger">Errou</span>
-                            {% endif %}
                         {% endif %}
 
                     </div>
