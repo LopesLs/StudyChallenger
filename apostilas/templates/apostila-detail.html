@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/start-challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'apostilas/css/adicionar_apostilas.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+
+                <a href="{{apostila.arquivo.url}}">
+                    <div style="width: 100%;" id="pdf-container"></div>
+                </a>
+
+            </div>
+            <div class="col-md">
+
+                <p>Views únicas: {{ views_unicas }}</p>
+                <p>Views totais: {{ total_views }}</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script>
+        const container = document.getElementById('pdf-container');
+
+        pdfjsLib.getDocument("{{apostila.arquivo.url}}").promise.then(pdf => {
+            pdf.getPage(1).then(page => {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale: 0.6 });
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                page.render({ canvasContext: context, viewport }).promise.then(() => {
+                    container.appendChild(canvas);
+                });
+            });
+        });
+    </script>
+{% endblock %}

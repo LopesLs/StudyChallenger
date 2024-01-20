@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/start-challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/challenge.css' %}" rel="stylesheet">
+    <link href="{% static 'apostilas/css/add_apostila.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+
+                <div class="box-form">
+                    {% if messages %}
+                    <br>
+                    {% for message in messages %}
+                    <section class="alert {{message.tags}}">
+                        {{message}}
+                    </section>
+                    {% endfor %}
+                    <br>
+                    {% endif %}
+                    <form action="" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+                        <p class="fonte-secundaria">Adicionar resumos</p>
+                        {{ form.as_p }}
+                        <br>
+                        <input type="submit" class="btn-cadastro" value="Enviar">
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for apostila in apostilas %}
+                            <tr class="linha">
+                                <td>{{ apostila.titulo }}</td>
+                                <td><a href="{% url 'detail_apostila' apostila.id %}" style="color: black; text-decoration: none;" class="btn-cadastro">Abrir</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+                <p class="fonte-secundaria">Views totais: {{ total_views }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

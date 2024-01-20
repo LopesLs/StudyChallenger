@@ -63,3 +63,11 @@ tr{
     background-color: var(--main-color);
 
 }
+
+#grafico1 {
+    max-height: 400px !important;
+}
+
+#grafico2 {
+    max-height: 400px !important;
+}
