@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'website/css/global.css' %}">
+    <link rel="shortcut icon" href="{% static 'website/images/logo.png' %}" type="image/x-icon">
     {% block style %}{% endblock %}
     {% block title %} <title> StudyChallenger | Home Page </title> {% endblock %}
 </head>
@@ -14,30 +15,35 @@
   {% block navbar %}
     <nav style="background-color: var(--main-color) !important" class="navbar navbar-expand-lg navbar-dark" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Study Async</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="{% static 'website/images/logo.png' %}" alt="Logo" width="48" height="48" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/">Study Async</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-between " id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Flashcard
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{% url 'new-flashcard' %}">Criar flashcard</a></li>
-                <li><a href="{% url 'list-flashcards' %}" class="dropdown-item">Listar flashcard</a></li>
-                <li><a class="dropdown-item" href="{% url 'new-challenge' %}">Criar desafio</a></li>
-                <li><a class="dropdown-item" href="{% url 'list-challenges' %}">Listar desafio</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/apostilas/new-apostila">Apostilas</a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="content-container navbar-nav">
+            <div class="content-container d-flex justify-content-between flex-direction">
+              <div class="d-flex flex-direction">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Flashcard
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'flashcard_create' %}">Criar flashcard</a></li>
+                    <li><a href="{% url 'list-flashcards' %}" class="dropdown-item">Listar flashcard</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new-challenge' %}">Criar desafio</a></li>
+                    <li><a class="dropdown-item" href="{% url 'challenge_list' %}">Listar desafio</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/apostilas/new-apostila">Apostilas</a>
+                </li>
+              </div>
+              <div class="leave-button-container">
+                <button onclick="redirect()" class="btn btn-danger" type="submit">Sair</button>
+              </div>
+            </div>
           </ul>
-          <div class="teste">
-            <button onclick="redirect()" class="btn btn-danger" type="submit">Sair</button>
-          </div>
         </div>
       </div>
     </nav>
@@ -54,8 +60,13 @@
     {% endif %}
     
     {% block content %}
-        <h1>Página Principal</h1>
+      <div class="container-fluid text-center mt-5">
+        <h1 class="display-4">Bem-vindo ao StudyChallenger!</h1>
+        <p class="lead">Internalize os conteúdos de maneira dinâmica, desafiando-se progressivamente a cada etapa.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'flashcard_create' %}" role="button">Iniciar Jornada</a>
+      </div>
     {% endblock %}
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       function redirect() {

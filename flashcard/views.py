@@ -13,7 +13,7 @@ from .forms import FlashcardForm, DesafioForm
 
 class FlashcardRequestHandler(LoginRequiredMixin, ListView):
     model = Flashcard
-    template_name = "flashcard_list.html"
+    template_name = "flashcard/flashcard_list.html"
     context_object_name = "flashcards"
 
     def get_context_data(self, **kwargs):
@@ -39,7 +39,7 @@ class FlashcardRequestHandler(LoginRequiredMixin, ListView):
 class NewFlashcardRequestHandler(LoginRequiredMixin, CreateView):
     model = Flashcard
     form_class = FlashcardForm
-    template_name = "new-flashcard.html"
+    template_name = "flashcard/flashcard_create.html"
     success_url = reverse_lazy("list-flashcards")
 
     def form_valid(self, form):
@@ -49,22 +49,22 @@ class NewFlashcardRequestHandler(LoginRequiredMixin, CreateView):
 
 class DelFlashcardRequestHandler(LoginRequiredMixin, DeleteView):
     model = Flashcard
-    template_name = "del-flashcard.html"
+    template_name = "flashcard/flashcard_delete.html"
     success_url = reverse_lazy("list-flashcards")
 
 
 class NewChallengeRequestHandler(LoginRequiredMixin, CreateView):
     model = Desafio
     form_class = DesafioForm
-    template_name = "start-challenge.html"
-    success_url = reverse_lazy("list-challenges")
+    template_name = "challenge/challenge_create.html"
+    success_url = reverse_lazy("challenge_list")
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         form.instance.user = self.request.user
 
         if not form.is_valid():
-            return redirect(reverse_lazy("list-challenges"))
+            return redirect(reverse_lazy("challenge_list"))
 
         desafio = Desafio(
             user=self.request.user,
@@ -98,12 +98,12 @@ class NewChallengeRequestHandler(LoginRequiredMixin, CreateView):
         desafio.flashcards.add(*flashcard_desafios)
         desafio.save()
 
-        return redirect(reverse_lazy("detail-challenge", kwargs={"pk": desafio.pk}))
+        return redirect(reverse_lazy("challenge_detail", kwargs={"pk": desafio.pk}))
 
 
 class ListChallengeRequestHandler(LoginRequiredMixin, ListView):
     model = Desafio
-    template_name = "list-challenges.html"
+    template_name = "challenge/challenge_list.html"
     context_object_name = "challenges"
 
     def get_queryset(self):
@@ -128,7 +128,7 @@ class ListChallengeRequestHandler(LoginRequiredMixin, ListView):
 
 class DetailChallengeRequestHandler(LoginRequiredMixin, DetailView):
     model = Desafio
-    template_name = "detail-challenge.html"
+    template_name = "challenge/challenge_detail.html"
     context_object_name = "challenge"
 
     def get_context_data(self, **kwargs):
@@ -155,8 +155,8 @@ class DetailChallengeRequestHandler(LoginRequiredMixin, DetailView):
 
 class DelChallengeRequestHandler(LoginRequiredMixin, DeleteView):
     model = Desafio
-    template_name = "del-flashcard.html"
-    success_url = reverse_lazy("list-challenges")
+    template_name = "flashcard/flashcard_delete.html"
+    success_url = reverse_lazy("challenge_list")
 
 
 def AwnserFlashcardRequestHandler(request, pk):
@@ -164,11 +164,11 @@ def AwnserFlashcardRequestHandler(request, pk):
 
     if flashcard_desafio.flashcard.user != request.user:
         return redirect(reverse_lazy("list-flashcards"))
-    
+
     flashcard_desafio.respondido = True
     flashcard_desafio.acertou = True if request.GET.get("acertou") == "1" else False
     flashcard_desafio.save()
-    
+
     challenge = Desafio.objects.get(id=request.GET.get("desafio_id"))
     challenge_flashcards = challenge.flashcards.all().count()
     challenge_flashcards_respondidos = challenge.flashcards.filter(
@@ -180,7 +180,7 @@ def AwnserFlashcardRequestHandler(request, pk):
         challenge.save()
 
     return redirect(
-        reverse_lazy("detail-challenge", kwargs={"pk": request.GET.get("desafio_id")})
+        reverse_lazy("challenge_detail", kwargs={"pk": request.GET.get("desafio_id")})
     )
 
 
@@ -195,23 +195,36 @@ def RelatoryChallengeRequestHandler(request, pk):
     categories = challenge.categoria.all()
     name_categories = [category.nome for category in categories]
 
-    dados2 = []
+    resultados_por_categoria = {}
 
     for category in categories:
-        dados2.append(
+        resultados_por_categoria[f"{category}"] = {
+            "acertos": (
+                challenge.flashcards.filter(flashcard__categoria=category)
+                .filter(acertou=True)
+                .count()
+            )
+        }
+        resultados_por_categoria[f"{category}"]["erros"] = (
             challenge.flashcards.filter(flashcard__categoria=category)
-            .filter(acertou=True)
+            .filter(acertou=False)
             .count()
         )
 
+    acertos_por_categoria = [
+        resultados_por_categoria[category]["acertos"]
+        for category in resultados_por_categoria
+    ]
+
     return render(
         request,
-        "relatory.html",
+        "challenge-relatory.html",
         {
             "challenge": challenge,
             "acertos": acertos,
             "erros": erros,
-            "dados2": dados2,
+            "acertos_por_categoria": acertos_por_categoria,
+            "resultados_por_categoria": resultados_por_categoria,
             "categories": name_categories,
         },
     )

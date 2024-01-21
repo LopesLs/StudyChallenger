@@ -5,16 +5,14 @@
 {% block style %}
     <link href="{% static 'website/css/authenticate.css' %}" rel="stylesheet">
     <link href="{% static 'flashcard/css/new-flashcard.css' %}" rel="stylesheet">
-    <link href="{% static 'flashcard/css/start-challenge.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-    <div class="container ctx">
-        <br><br>
-        <h2 class="fonte-principal">Criar desafio</h2>
-        <p class="fonte-secundaria">Escolha as categorias e a dificuldade do desafio</p>
+    <div class="box-new-flashcard">
         <form method="POST">
+            <h1 class="mt-3 mb-3">Criar desafio</h2>
+            <p class="lead">Escolha as categorias e a dificuldade do desafio</p>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn-cadastro" value="Iniciar desafio">
