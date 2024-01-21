@@ -14,11 +14,6 @@ body{
     color: white !important;
 }
 
-.navbar {
-    background-color: red !important;
-    color: white !important;
-}
-
 .icon {
     width: 18px !important;
     height: 18px !important;
@@ -26,4 +21,20 @@ body{
 
 .alert {
     --bs-alert-margin-bottom: 0px !important;
+}
+
+.content-container {
+    width: 100% !important;
+}
+
+/* Media Queries */
+
+@media (max-width: 991px) {
+    .flex-direction {
+        flex-direction: column !important;
+    }
+
+    content-container {
+        width: auto !important;
+    }
 }
