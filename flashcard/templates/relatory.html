@@ -27,6 +27,52 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md">
+                <p class="fonte-secundaria">Acertos por categoria</p>
+                <hr>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Acertos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria, data in resultados_por_categoria.items %}
+                            <tr>
+                                <td>{{ categoria }}</td>
+                                <td>{{ data.acertos }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md">
+                <p class="fonte-secundaria">Erros por categoria</p>
+                <hr>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Erros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria, data in resultados_por_categoria.items %}
+                            <tr>
+                                <td>{{ categoria }}</td>
+                                <td>{{ data.erros }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -56,7 +102,7 @@
             labels: {{ categories|safe }},
             datasets: [{
               label: 'Quantidade',
-              data: {{ dados2 }},
+              data: {{ acertos_por_categoria }},
             }]
           },
           

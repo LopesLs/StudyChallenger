@@ -164,11 +164,11 @@ def AwnserFlashcardRequestHandler(request, pk):
 
     if flashcard_desafio.flashcard.user != request.user:
         return redirect(reverse_lazy("list-flashcards"))
-    
+
     flashcard_desafio.respondido = True
     flashcard_desafio.acertou = True if request.GET.get("acertou") == "1" else False
     flashcard_desafio.save()
-    
+
     challenge = Desafio.objects.get(id=request.GET.get("desafio_id"))
     challenge_flashcards = challenge.flashcards.all().count()
     challenge_flashcards_respondidos = challenge.flashcards.filter(
@@ -195,14 +195,26 @@ def RelatoryChallengeRequestHandler(request, pk):
     categories = challenge.categoria.all()
     name_categories = [category.nome for category in categories]
 
-    dados2 = []
+    resultados_por_categoria = {}
 
     for category in categories:
-        dados2.append(
+        resultados_por_categoria[f"{category}"] = {
+            "acertos": (
+                challenge.flashcards.filter(flashcard__categoria=category)
+                .filter(acertou=True)
+                .count()
+            )
+        }
+        resultados_por_categoria[f"{category}"]["erros"] = (
             challenge.flashcards.filter(flashcard__categoria=category)
-            .filter(acertou=True)
+            .filter(acertou=False)
             .count()
         )
+
+    acertos_por_categoria = [
+        resultados_por_categoria[category]["acertos"]
+        for category in resultados_por_categoria
+    ]
 
     return render(
         request,
@@ -211,7 +223,8 @@ def RelatoryChallengeRequestHandler(request, pk):
             "challenge": challenge,
             "acertos": acertos,
             "erros": erros,
-            "dados2": dados2,
+            "acertos_por_categoria": acertos_por_categoria,
+            "resultados_por_categoria": resultados_por_categoria,
             "categories": name_categories,
         },
     )
