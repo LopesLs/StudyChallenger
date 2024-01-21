@@ -29,10 +29,10 @@
                     Flashcard
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'new-flashcard' %}">Criar flashcard</a></li>
+                    <li><a class="dropdown-item" href="{% url 'flashcard_create' %}">Criar flashcard</a></li>
                     <li><a href="{% url 'list-flashcards' %}" class="dropdown-item">Listar flashcard</a></li>
                     <li><a class="dropdown-item" href="{% url 'new-challenge' %}">Criar desafio</a></li>
-                    <li><a class="dropdown-item" href="{% url 'list-challenges' %}">Listar desafio</a></li>
+                    <li><a class="dropdown-item" href="{% url 'challenge_list' %}">Listar desafio</a></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -60,10 +60,10 @@
     {% endif %}
     
     {% block content %}
-      <div class="text-center mt-5">
+      <div class="container-fluid text-center mt-5">
         <h1 class="display-4">Bem-vindo ao StudyChallenger!</h1>
         <p class="lead">Internalize os conteúdos de maneira dinâmica, desafiando-se progressivamente a cada etapa.</p>
-        <a class="btn btn-primary btn-lg" href="{% url 'new-flashcard' %}" role="button">Get Started</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'flashcard_create' %}" role="button">Iniciar Jornada</a>
       </div>
     {% endblock %}
 

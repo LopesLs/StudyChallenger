@@ -51,7 +51,7 @@
                                 {{ flashcard.categoria }}
                                 <div class="d-flex flex-row gap-2 align-items-center">
                                     <span class="badge rounded-pill text-bg-{{flashcard.css_difficulty.0}}">{{ flashcard.css_difficulty.1 }}</span>
-                                    <a href="{% url 'del-flashcard' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
+                                    <a href="{% url 'flashcard_delete' flashcard.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
                                 </div>
                             </div>
 

@@ -15,6 +15,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
+            <a class="btn btn-primary" href="{% url 'list-flashcards' %}">Cancelar</a>
             <button class="btn btn-danger" type="submit">Deletar</button>
         </form>
     </div>
