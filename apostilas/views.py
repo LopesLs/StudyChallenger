@@ -10,8 +10,8 @@ from .forms import ApostilaForm
 class NewApostilaRequestHandler(LoginRequiredMixin, CreateView):
     model = Apostila
     form_class = ApostilaForm
-    template_name = "new-apostila.html"
-    success_url = reverse_lazy("new_apostila")
+    template_name = "apostila_create.html"
+    success_url = reverse_lazy("apostila_create")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -28,7 +28,7 @@ class NewApostilaRequestHandler(LoginRequiredMixin, CreateView):
 
 class ApostilaDetailRequestHandler(LoginRequiredMixin, DetailView):
     model = Apostila
-    template_name = "apostila-detail.html"
+    template_name = "apostila_detail.html"
     context_object_name = "apostila"
 
     def get(self, request, *args, **kwargs):
