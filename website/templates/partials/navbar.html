@@ -1,0 +1,36 @@
+{% load static %}
+
+<nav style="background-color: var(--main-color) !important" class="navbar navbar-expand-lg navbar-dark" data-bs-theme="dark">
+<div class="container-fluid">
+    <img src="{% static 'website/images/logo.png' %}" alt="Logo" width="48" height="48" class="d-inline-block align-text-top">
+    <a class="navbar-brand" href="/">Study Async</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="nav-container navbar-nav">
+        <div class="nav-container d-flex justify-content-between flex-direction">
+        <div class="d-flex flex-direction">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Flashcard
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'flashcard_create' %}">Criar flashcard</a></li>
+                <li><a href="{% url 'list-flashcards' %}" class="dropdown-item">Listar flashcard</a></li>
+                <li><a class="dropdown-item" href="{% url 'challenge_create' %}">Criar desafio</a></li>
+                <li><a class="dropdown-item" href="{% url 'challenge_list' %}">Listar desafio</a></li>
+            </ul>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'apostila_create' %}">Apostilas</a>
+            </li>
+        </div>
+        <div class="leave-button-container">
+            <button onclick="redirect()" class="btn btn-danger" type="submit">Sair</button>
+        </div>
+        </div>
+    </ul>
+    </div>
+</div>
+</nav>

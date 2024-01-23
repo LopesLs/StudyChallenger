@@ -8,70 +8,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'website/css/global.css' %}">
     <link rel="shortcut icon" href="{% static 'website/images/logo.png' %}" type="image/x-icon">
-    {% block style %}{% endblock %}
+    {% block style %}
+      <link rel="stylesheet" type="text/css" href="{% static 'website/css/home.css' %}">
+    {% endblock %}
     {% block title %} <title> StudyChallenger | Home Page </title> {% endblock %}
 </head>
 <body>
   {% block navbar %}
-    <nav style="background-color: var(--main-color) !important" class="navbar navbar-expand-lg navbar-dark" data-bs-theme="dark">
-      <div class="container-fluid">
-        <img src="{% static 'website/images/logo.png' %}" alt="Logo" width="48" height="48" class="d-inline-block align-text-top">
-        <a class="navbar-brand" href="/">Study Async</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="content-container navbar-nav">
-            <div class="content-container d-flex justify-content-between flex-direction">
-              <div class="d-flex flex-direction">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Flashcard
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'flashcard_create' %}">Criar flashcard</a></li>
-                    <li><a href="{% url 'list-flashcards' %}" class="dropdown-item">Listar flashcard</a></li>
-                    <li><a class="dropdown-item" href="{% url 'new-challenge' %}">Criar desafio</a></li>
-                    <li><a class="dropdown-item" href="{% url 'challenge_list' %}">Listar desafio</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'apostila_create' %}">Apostilas</a>
-                </li>
-              </div>
-              <div class="leave-button-container">
-                <button onclick="redirect()" class="btn btn-danger" type="submit">Sair</button>
-              </div>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    {% include 'partials/navbar.html' %}
   {% endblock %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="m-3 alert {{ message.tags }} alert-dismissible fade-show" role="alert">
-                <object class="icon" type="image/svg+xml" data="{% static 'images/icons.svg' %}"></object>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+  {% include 'partials/messages.html' %}
     
-    {% block content %}
-      <div class="container-fluid text-center mt-5">
-        <h1 class="display-4">Bem-vindo ao StudyChallenger!</h1>
-        <p class="lead">Internalize os conteúdos de maneira dinâmica, desafiando-se progressivamente a cada etapa.</p>
-        <a class="btn btn-primary btn-lg" href="{% url 'flashcard_create' %}" role="button">Iniciar Jornada</a>
-      </div>
-    {% endblock %}
+  {% block content %}
+    <div class="container-fluid content-container  text-center">
+      <h1 class="display-4">Bem-vindo ao StudyChallenger!</h1>
+      <p class="lead">Internalize os conteúdos de maneira dinâmica, desafiando-se progressivamente a cada etapa.</p>
+      <a class="btn btn-primary btn-lg" href="{% url 'flashcard_create' %}" role="button">Iniciar Jornada</a>
+    </div>
+  {% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      function redirect() {
-        window.location.href = "{% url 'account_logout' %}";
-      }
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'website/js/main.js' %}"></script>
 </body>
 </html>
