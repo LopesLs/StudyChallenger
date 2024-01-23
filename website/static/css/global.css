@@ -1,20 +1,21 @@
 :root{
-     
     --main-color: #0b1526;
     --dark-color: #000716;
     --secondary-dark-color: rgb(15, 2, 26);
     --light-color: #00c1f3;
     --contrast-color: #f4c96b;
     --differential-color: #58fcd5;
-
 }
 
-body{
+body {
     background-color: var(--dark-color) !important;
     color: white !important;
 }
 
 .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 18px !important;
     height: 18px !important;
 }
@@ -23,7 +24,7 @@ body{
     --bs-alert-margin-bottom: 0px !important;
 }
 
-.content-container {
+.nav-container{
     width: 100% !important;
 }
 
@@ -34,7 +35,7 @@ body{
         flex-direction: column !important;
     }
 
-    content-container {
+    .nav-container {
         width: auto !important;
     }
 }
