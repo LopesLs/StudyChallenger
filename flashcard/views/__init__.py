@@ -1,15 +1,3 @@
-from .challenges_views import (
-    NewChallengeRequestHandler, # noqa: F401
-    ListChallengeRequestHandler, # noqa: F401
-    DelChallengeRequestHandler, # noqa: F401
-    DetailChallengeRequestHandler, # noqa: F401
-    RelatoryChallengeRequestHandler, # noqa: F401
-)  
-
-
-from .flashcards_views import (
-    FlashcardRequestHandler, # noqa: F401
-    NewFlashcardRequestHandler, # noqa: F401
-    DelFlashcardRequestHandler, # noqa: F401
-    AwnserFlashcardRequestHandler, # noqa: F401
-)
+from .handlers import *  # noqa: F401, F403
+from .utils.flashcard_utils import AwnserFlashcardRequestHandler  # noqa: F401
+from .utils.challenge_utils import RelatoryChallengeRequestHandler  # noqa: F401
