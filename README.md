@@ -1,5 +1,7 @@
 # StudyChallenger
 
+![banner](https://cdn.discordapp.com/attachments/951765233091870740/1199685914797035570/image.png?ex=65c37193&is=65b0fc93&hm=faf6792e4b1c50eea61eede5227f074cb0466a0e1f66e75a6f5dcee5f6aa9c07&)
+
 ## Prerequisites
 
 Before you begin, make sure you have the following installed on your system:
