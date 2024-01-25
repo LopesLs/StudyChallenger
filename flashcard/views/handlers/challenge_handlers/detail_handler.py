@@ -5,11 +5,19 @@ from ....models import Desafio
 
 
 class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
+    """
+    This class shows a challenge detail
+    """
+    
     model = Desafio
     template_name = "challenge/challenge_detail.html"
     context_object_name = "challenge"
 
     def get_context_data(self, **kwargs):
+        """
+        Send the number of hits, errors and missing to the template
+        """
+
         context = super().get_context_data(**kwargs)
 
         challenge = context["challenge"]
@@ -27,5 +35,11 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
         return context
 
     def get_queryset(self):
+        """
+        Filter challenges by the current user
+        """
+
+        # TODO: Think about a way to make this method more generic
+
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
