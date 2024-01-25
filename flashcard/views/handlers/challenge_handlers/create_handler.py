@@ -9,12 +9,22 @@ from ....forms import DesafioForm
 
 
 class ChallengeCreateRequestHandler(LoginRequiredMixin, CreateView):
+    """
+    This class creates a challenge
+    """
+    
     model = Desafio
     form_class = DesafioForm
     template_name = "challenge/challenge_create.html"
     success_url = reverse_lazy("challenge_list")
 
     def post(self, request, *args, **kwargs):
+        """
+        Create a challenge, flashcard_desafio and add flashcards to the challenge
+        """
+
+        # TODO: Refactor this method in soon
+
         form = self.get_form()
         form.instance.user = self.request.user
 
