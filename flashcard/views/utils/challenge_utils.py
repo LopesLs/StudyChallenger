@@ -44,7 +44,7 @@ def RelatoryChallengeRequestHandler(request, pk):
 
     return render(
         request,
-        "challenge-relatory.html",
+        "challenge/challenge_relatory.html",
         {
             "challenge": challenge,
             "acertos": acertos,
