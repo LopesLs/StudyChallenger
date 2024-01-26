@@ -16,7 +16,7 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         """
-        Send the number of hits, errors and missing to the template
+        Send the number of hits, errors, missing and categories to the template
         """
 
         context = super().get_context_data(**kwargs)
@@ -32,6 +32,10 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
         ).count()
 
         context["faltantes"] = challenge.flashcards.filter(respondido=False).count()
+
+        context["categories"] = challenge.flashcards.all().values_list(
+            "flashcard__categoria__nome", flat=True
+        ).distinct()
 
         return context
 
