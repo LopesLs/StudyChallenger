@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 
 from ....models import Desafio
+from ...utils.global_utils import filter_by_user
+from ...utils.challenge_utils import update_challenge_context_data
 
 
 class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
@@ -15,22 +17,14 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         """
-        Send the number of hits, errors and missing to the template
+        Send the number of hits, errors, missing and categories to the template
         """
 
         context = super().get_context_data(**kwargs)
 
         challenge = context["challenge"]
 
-        context["acertos"] = challenge.flashcards.filter(
-            respondido=True, acertou=True
-        ).count()
-
-        context["erros"] = challenge.flashcards.filter(
-            respondido=True, acertou=False
-        ).count()
-
-        context["faltantes"] = challenge.flashcards.filter(respondido=False).count()
+        context.update(update_challenge_context_data(challenge))
 
         return context
 
@@ -39,7 +33,5 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
         Filter challenges by the current user
         """
 
-        # TODO: Think about a way to make this method more generic
-
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return filter_by_user(queryset, self.request)

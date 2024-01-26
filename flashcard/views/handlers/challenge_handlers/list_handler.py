@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 
 from ....models import Desafio, Categoria, Flashcard
+from ...utils.global_utils import filter_by_user, filter_by_fields
 
 
 class ChallengeListRequestHandler(LoginRequiredMixin, ListView):
@@ -14,13 +15,11 @@ class ChallengeListRequestHandler(LoginRequiredMixin, ListView):
         category = self.request.GET.get("category")
         difficulty = self.request.GET.get("difficulty")
 
-        if category:
-            queryset = queryset.filter(categoria__id=category)
+        queryset = filter_by_user(queryset, self.request)
 
-        if difficulty:
-            queryset = queryset.filter(dificuldade=difficulty)
+        queryset = filter_by_fields(queryset, category, difficulty)
 
-        return queryset.filter(user=self.request.user)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
