@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 
 from ....models import Desafio
+from ...utils.global_utils import filter_by_user
 
 
 class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
@@ -39,7 +40,5 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
         Filter challenges by the current user
         """
 
-        # TODO: Think about a way to make this method more generic
-
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        return filter_by_user(queryset, self.request)

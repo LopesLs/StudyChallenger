@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 
 from ....models import Flashcard, Categoria
+from ...utils.global_utils import filter_by_user, filter_by_fields
 
 
 class FlashcardListRequestHandler(LoginRequiredMixin, ListView):
@@ -32,12 +33,8 @@ class FlashcardListRequestHandler(LoginRequiredMixin, ListView):
         category = self.request.GET.get("category")
         difficulty = self.request.GET.get("dificulty")
 
-        queryset = queryset.filter(user=self.request.user)
+        queryset = filter_by_user(queryset, self.request)
 
-        if category:
-            queryset = queryset.filter(categoria__id=category)
-
-        if difficulty:
-            queryset = queryset.filter(dificuldade=difficulty)
+        queryset = filter_by_fields(queryset, category, difficulty)
 
         return queryset

@@ -3,6 +3,7 @@ from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 
 from ....models import Flashcard
+from ...utils.global_utils import filter_by_user
 
 
 class FlashcardDeleteRequestHandler(LoginRequiredMixin, DeleteView):
@@ -18,5 +19,7 @@ class FlashcardDeleteRequestHandler(LoginRequiredMixin, DeleteView):
         """
         Return only flashcards from the current user
         """
+
         queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        
+        return filter_by_user(queryset, self.request)
