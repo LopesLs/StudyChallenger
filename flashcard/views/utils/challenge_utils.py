@@ -5,6 +5,10 @@ from ...models import Desafio
 
 
 def RelatoryChallengeRequestHandler(request, pk):
+    """
+    Show a challenge relatory based on the user's answers
+    """
+
     challenge = Desafio.objects.get(id=pk)
 
     if challenge.user != request.user:
