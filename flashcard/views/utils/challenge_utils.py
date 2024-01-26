@@ -9,6 +9,8 @@ def RelatoryChallengeRequestHandler(request, pk):
     Show a challenge relatory based on the user's answers
     """
 
+    # TODO: Refactor this function
+
     challenge = Desafio.objects.get(id=pk)
 
     if challenge.user != request.user:
@@ -52,3 +54,29 @@ def RelatoryChallengeRequestHandler(request, pk):
             "categories": name_categories,
         },
     )
+
+
+def update_challenge_context_data(challenge):
+    """
+    Get the number of hits, errors, missing and categories
+    """
+
+    context = {}
+
+    context["acertos"] = challenge.flashcards.filter(
+        respondido=True, acertou=True
+    ).count()
+
+    context["erros"] = challenge.flashcards.filter(
+        respondido=True, acertou=False
+    ).count()
+
+    context["faltantes"] = challenge.flashcards.filter(respondido=False).count()
+
+    context["categories"] = (
+        challenge.flashcards.all()
+        .values_list("flashcard__categoria__nome", flat=True)
+        .distinct()
+    )
+
+    return context

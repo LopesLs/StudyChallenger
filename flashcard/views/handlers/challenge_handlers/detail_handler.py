@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 
 from ....models import Desafio
 from ...utils.global_utils import filter_by_user
+from ...utils.challenge_utils import update_challenge_context_data
 
 
 class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
@@ -23,19 +24,7 @@ class ChallengeDetailRequestHandler(LoginRequiredMixin, DetailView):
 
         challenge = context["challenge"]
 
-        context["acertos"] = challenge.flashcards.filter(
-            respondido=True, acertou=True
-        ).count()
-
-        context["erros"] = challenge.flashcards.filter(
-            respondido=True, acertou=False
-        ).count()
-
-        context["faltantes"] = challenge.flashcards.filter(respondido=False).count()
-
-        context["categories"] = challenge.flashcards.all().values_list(
-            "flashcard__categoria__nome", flat=True
-        ).distinct()
+        context.update(update_challenge_context_data(challenge))
 
         return context
 
