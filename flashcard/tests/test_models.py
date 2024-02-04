@@ -12,7 +12,7 @@ class CategoriaModelTest(TestCase):
     def test_nome_label(self):
         categoria = Categoria.objects.get(id=1)
         field_label = categoria._meta.get_field("nome").verbose_name
-        self.assertEquals(field_label, "nome")
+        self.assertEqual(field_label, "nome")
 
     def test_instance_creation(self):
         category = Categoria.objects.get(id=1)
