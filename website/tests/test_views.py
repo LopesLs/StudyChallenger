@@ -19,7 +19,7 @@ class HomePageTest(TestCase):
     def test_login_works_properly(self):
         response = self.client.get("/")
 
-        self.assertEqual(response.context["user"].username, "testuser")
+        self.assertEquals(response.context["user"].username, "testuser")
 
     def test_redirect_if_not_logged_in(self):
         self.client.logout()
@@ -29,9 +29,9 @@ class HomePageTest(TestCase):
     def test_home_page_url_exists(self):
         response = self.client.get("/")
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEquals(response.status_code, 200)
 
     def test_home_page_url_accessible_by_name(self):
         response = self.client.get(reverse_lazy("home"))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEquals(response.status_code, 200)
