@@ -1,5 +1,7 @@
 # StudyChallenger
 
+StudyChallenger is a webapp for flashcards
+
 ![banner](https://cdn.discordapp.com/attachments/951765233091870740/1199807428427001930/banner.png?ex=65c3e2be&is=65b16dbe&hm=cb7bb426820e457d27a8949bcb89abc23a4b5117c49121c4cb6c5445035c250b&)
 
 ## Prerequisites
@@ -30,7 +32,7 @@ Before you begin, make sure you have the following installed on your system:
         python -m venv .venv
         ```
 
-    - On Linux:
+    - On macOS and Linux:
 
         ```bash
         python3 -m venv .venv
@@ -62,10 +64,16 @@ Before you begin, make sure you have the following installed on your system:
     python manage.py migrate
     ```
 
-7. Create a superuser (admin) account:
+7. Create a superuser (admin) account (Optional):
 
     ```bash
     python manage.py createsuperuser
+    ```
+
+8. Testing (Optional):
+
+    ```bash
+    python manage.py test
     ```
 
 ## Running the Project
@@ -76,6 +84,6 @@ To run the Django project, execute the following command:
 python3 manage.py runserver
 ```
 
-And you have the website active in `localhost:8000` for test and use it.
+And you have the website active in `tttps://127.0.0.1:8000` for test and use it.
 
 Fell free to colaborate in this project!!!
