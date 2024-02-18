@@ -1,0 +1,3 @@
+-r requirements.txt
+django-browser-reload==1.12.1
+pip-upgrader==1.4.15
