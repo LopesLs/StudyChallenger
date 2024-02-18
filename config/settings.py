@@ -44,12 +44,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     "website.apps.WebsiteConfig",
     "flashcard.apps.FlashcardConfig",
     "apostilas.apps.ApostilasConfig",
+    
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
@@ -60,7 +64,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
     "allauth.account.middleware.AccountMiddleware",
+
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
